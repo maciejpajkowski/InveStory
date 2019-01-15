@@ -18,21 +18,40 @@ const MainGrid = styled.div`
 
 export default class App extends React.Component {
   state = {
-    money: 0.0,
-    availableProducts: [
+    money: 100.0,
+    products: [
       {
+        id: 1,
         title: "Apples",
         description: "Good old apples!",
-        inStock: 41
+        price: 0.3,
+        inStock: 41,
+        youHave: 0
       },
       {
+        id: 2,
         title: "Cars",
-        description: "90's Ford Mondeos.",
-        inStock: 11
+        description: "Used ones.",
+        price: 1500,
+        inStock: 11,
+        youHave: 0
       }
     ],
-    ownedProducts: [],
     investments: []
+  };
+
+  buyProduct = productPrice => {
+    this.setState(prevState => ({
+      money: prevState.money - productPrice,
+      products: [...this.state.products]
+    }));
+  };
+
+  sellProduct = productPrice => {
+    this.setState(prevState => ({
+      money: prevState.money + productPrice,
+      products: [...this.state.products]
+    }));
   };
 
   render() {
@@ -43,7 +62,9 @@ export default class App extends React.Component {
           <Sidebar money={this.state.money} />
           <Viewer
             money={this.state.money}
-            availableProducts={this.state.availableProducts}
+            products={this.state.products}
+            buyProduct={this.buyProduct}
+            sellProduct={this.sellProduct}
           />
         </MainGrid>
       </Fragment>

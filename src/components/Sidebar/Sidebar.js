@@ -27,8 +27,8 @@ const SidebarStyle = styled.div`
   }
 
   .money {
-    font-size: 20px;
-    color: green;
+    font-size: 24px;
+    color: ${props => (props.money < 0 ? "red" : "limegreen")};
     text-align: center;
   }
 
@@ -57,11 +57,18 @@ const SidebarStyle = styled.div`
   }
 `;
 
+const B = styled.span`
+  font-weight: 800;
+  font-size: 26px;
+`;
+
 const Sidebar = props => (
-  <SidebarStyle>
+  <SidebarStyle money={props.money}>
     <h1>InveStory</h1>
     <div className="username" />
-    <p className="money">Cash: {props.money}</p>
+    <p className="money">
+      Cash: <B>{parseFloat(props.money).toFixed(2)} $</B>
+    </p>
     <ul>
       <li>TRADE</li>
       <li>INVEST</li>

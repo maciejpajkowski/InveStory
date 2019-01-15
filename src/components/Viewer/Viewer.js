@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
+import uuid from "uuid";
 
 const ViewerStyle = styled.div`
   background-color: #fafafa;
@@ -15,12 +16,17 @@ const ViewerStyle = styled.div`
 
 const Viewer = props => (
   <ViewerStyle>
-    {props.availableProducts.map(product => {
+    {props.products.map(product => {
       return (
         <Product
+          key={uuid()}
           title={product.title}
           description={product.description}
+          price={product.price}
           inStock={product.inStock}
+          youHave={product.youHave}
+          buyProduct={props.buyProduct}
+          sellProduct={props.sellProduct}
         />
       );
     })}
