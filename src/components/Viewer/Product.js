@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ProductStyle = styled.div`
+  color: darkgreen;
   background-color: #fff;
   height: 200px;
   box-shadow: 0px 0px 4px 1px #a2d9a2;
@@ -21,7 +22,7 @@ const ProductStyle = styled.div`
   }
 
   .description {
-    color: grey;
+    color: seagreen;
     font-style: italic;
   }
 
@@ -95,7 +96,6 @@ export default class Product extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <ProductStyle>
         <div className="divider">

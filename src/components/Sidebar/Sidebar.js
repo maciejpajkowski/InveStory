@@ -22,6 +22,8 @@ const SidebarStyle = styled.div`
     border-radius: 100%;
     margin: 10px auto;
     font-weight: bold;
+    font-size: 60px;
+    color: lightgreen;
     justify-content: center;
     align-items: center;
   }
@@ -65,7 +67,7 @@ const B = styled.span`
 const Sidebar = props => (
   <SidebarStyle money={props.money}>
     <h1>InveStory</h1>
-    <div className="username" />
+    <div className="username">$</div>
     <p className="money">
       Cash: <B>{parseFloat(props.money).toFixed(2)} $</B>
     </p>
