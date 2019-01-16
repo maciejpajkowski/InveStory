@@ -11,7 +11,7 @@ const ProductStyle = styled.div`
   transition: all 0.3s;
 
   &:hover {
-    box-shadow: 0px 0px 20px 2px #a2d9a2;
+    box-shadow: 0px 0px 20px 2px lightgreen;
     transform: translateY(-3px);
     cursor: pointer;
   }
@@ -44,6 +44,7 @@ const ProductStyle = styled.div`
 
   .cost {
     margin-top: 10px;
+    text-align: center;
   }
 
   .sell-buy {
@@ -52,7 +53,7 @@ const ProductStyle = styled.div`
   }
 
   .price {
-    font-size: 26px;
+    font-size: 28px;
     color: limegreen;
   }
 
@@ -77,6 +78,7 @@ const ProductStyle = styled.div`
 
     &:active {
       background-color: greenyellow;
+      border: 1px solid greenyellow;
     }
   }
 `;
@@ -85,37 +87,54 @@ const B = styled.span`
   font-weight: 800;
 `;
 
-const Product = props => (
-  <ProductStyle>
-    <div className="divider">
-      <div className="left-section">
-        <h2>{props.title}</h2>
-        <p className="description">{props.description}</p>
-        <p>
-          Available for: <B>{props.timeAvailable}</B>
-        </p>
-        <span>
-          Currently available: <B>{props.inStock}</B>
-        </span>
-        <br />
-        <span>
-          You have: <B>{props.youHave}</B>
-        </span>
-      </div>
-      <div className="right-section">
-        <div className="cost">
-          <span>Price:</span>
-          <br />
-          <span className="price">{parseFloat(props.price).toFixed(2)} $</span>
+export default class Product extends React.Component {
+  onBuyProduct() {
+    this.props.changeState({
+      money: this.props.money - this.props.price
+    });
+  }
+
+  render() {
+    console.log(this.props);
+    return (
+      <ProductStyle>
+        <div className="divider">
+          <div className="left-section">
+            <h2>{this.props.title}</h2>
+            <p className="description">{this.props.description}</p>
+            <p>
+              Available for: <B>{this.props.timeAvailable}</B>
+            </p>
+            <span>
+              Currently available: <B>{this.props.inStock}</B>
+            </span>
+            <br />
+            <span>
+              You have: <B>{this.props.youHave}</B>
+            </span>
+          </div>
+          <div className="right-section">
+            <div className="cost">
+              <span>Price:</span>
+              <br />
+              <span className="price">
+                {parseFloat(this.props.price).toFixed(2)} $
+              </span>
+            </div>
+            <div className="sell-buy">
+              <button onClick={() => this.props.sellProduct(this.props)}>
+                SELL
+              </button>
+              <button onClick={() => this.props.buyProduct(this.props)}>
+                BUY
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="sell-buy">
-          <button onClick={() => props.sellProduct(props.price)}>SELL</button>
-          <button onClick={() => props.buyProduct(props.price)}>BUY</button>
-        </div>
-      </div>
-    </div>
-  </ProductStyle>
-);
+      </ProductStyle>
+    );
+  }
+}
 
 Product.defaultProps = {
   title: "Unnamed",
@@ -125,5 +144,3 @@ Product.defaultProps = {
   youHave: 0,
   price: 100.0
 };
-
-export default Product;

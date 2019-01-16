@@ -21,7 +21,7 @@ export default class App extends React.Component {
     money: 100.0,
     products: [
       {
-        id: 1,
+        id: 0,
         title: "Apples",
         description: "Good old apples!",
         price: 0.3,
@@ -29,7 +29,7 @@ export default class App extends React.Component {
         youHave: 0
       },
       {
-        id: 2,
+        id: 1,
         title: "Cars",
         description: "Used ones.",
         price: 1500,
@@ -40,17 +40,35 @@ export default class App extends React.Component {
     investments: []
   };
 
-  buyProduct = productPrice => {
+  buyProduct = product => {
+    const index = this.state.products.findIndex(prod => prod.id === product.id);
+    const updatedProducts = [...this.state.products];
+    if (updatedProducts[index].inStock > 0) {
+      updatedProducts[index].inStock--;
+      updatedProducts[index].youHave++;
+    } else {
+      return;
+    }
+
     this.setState(prevState => ({
-      money: prevState.money - productPrice,
-      products: [...this.state.products]
+      money: prevState.money - product.price,
+      products: updatedProducts
     }));
   };
 
-  sellProduct = productPrice => {
+  sellProduct = product => {
+    const index = this.state.products.findIndex(prod => prod.id === product.id);
+    const updatedProducts = [...this.state.products];
+    if (updatedProducts[index].youHave > 0) {
+      updatedProducts[index].inStock++;
+      updatedProducts[index].youHave--;
+    } else {
+      return;
+    }
+
     this.setState(prevState => ({
-      money: prevState.money + productPrice,
-      products: [...this.state.products]
+      money: prevState.money + product.price,
+      products: updatedProducts
     }));
   };
 
