@@ -59,6 +59,7 @@ const ProductStyle = styled.div`
   }
 
   button {
+    width: 60px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid lightgreen;
@@ -89,12 +90,6 @@ const B = styled.span`
 `;
 
 export default class Product extends React.Component {
-  onBuyProduct() {
-    this.props.changeState({
-      money: this.props.money - this.props.price
-    });
-  }
-
   render() {
     return (
       <ProductStyle>
@@ -102,11 +97,12 @@ export default class Product extends React.Component {
           <div className="left-section">
             <h2>{this.props.title}</h2>
             <p className="description">{this.props.description}</p>
-            <p>
-              Available for: <B>{this.props.timeAvailable}</B>
-            </p>
+            <p>--------------------------</p>
             <span>
-              Currently available: <B>{this.props.inStock}</B>
+              Currently available:{" "}
+              <B>
+                {this.props.inStock <= 0 ? "Out of stock" : this.props.inStock}
+              </B>
             </span>
             <br />
             <span>
@@ -139,7 +135,6 @@ export default class Product extends React.Component {
 Product.defaultProps = {
   title: "Unnamed",
   description: "This is an unnamed thing available for trade.",
-  timeAvailable: "00:00:00",
   inStock: 100,
   youHave: 0,
   price: 100.0

@@ -21,16 +21,18 @@ export default class App extends React.Component {
   state = {
     money: 100.0,
     products: ProductsList,
-    investments: []
+    investments: [],
+    gameStarted: false
   };
 
   cycleUpdate = () => {
-    let start = false;
-    if (start === false) {
+    if (!this.state.gameStarted) {
       setInterval(() => {
         this.callUpdate();
       }, 8000); // IMPORTANT!
-      start = true;
+      this.setState({
+        gameStarted: true
+      });
     }
   };
 
@@ -59,23 +61,95 @@ export default class App extends React.Component {
       } else {
         switch (item.classification) {
           case "small":
-            item.inStock -= smallProductsStockRandomizer;
-            break;
+            if (item.inStock < 0) {
+              break;
+            } else {
+              item.inStock -= smallProductsStockRandomizer;
+              break;
+            }
           case "medium":
-            item.inStock -= mediumProductsStockRandomizer;
-            break;
+            if (item.inStock < 0) {
+              break;
+            } else {
+              item.inStock -= mediumProductsStockRandomizer;
+              break;
+            }
           case "large":
-            item.inStock -= largeProductsStockRandomizer;
-            break;
+            if (item.inStock < 0) {
+              break;
+            } else {
+              item.inStock -= largeProductsStockRandomizer;
+              break;
+            }
           default:
             break;
         }
       }
       return item;
     });
-    this.setState(prevState => ({
+    this.modifyPrices();
+    this.setState(() => ({
       products: this.state.products
     }));
+  };
+
+  modifyPrices = () => {
+    console.log("Prices updated!");
+    this.state.products.map(item => {
+      // Stock independent flow of prices
+      const addOrRemoveRandomizer = Math.floor(Math.random() * 10 + 1);
+      const smallProductsCostRandomizer =
+        Math.floor(Math.random() * 35 + 1) / 100;
+      const mediumProductsCostRandomizer =
+        Math.floor(Math.random() * 120 + 1) / 100;
+      const largeProductsCostRandomizer =
+        Math.floor(Math.random() * 600 + 1) / 100;
+
+      if (addOrRemoveRandomizer >= 5) {
+        switch (item.classification) {
+          case "small":
+            item.price += smallProductsCostRandomizer;
+            break;
+          case "medium":
+            item.price += mediumProductsCostRandomizer;
+            break;
+          case "large":
+            item.price += largeProductsCostRandomizer;
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (item.classification) {
+          case "small":
+            if (item.price < 0.3) {
+              break;
+            } else {
+              item.price -= smallProductsCostRandomizer;
+              break;
+            }
+          case "medium":
+            if (item.price < 2) {
+              break;
+            } else {
+              item.price -= mediumProductsCostRandomizer;
+              break;
+            }
+          case "large":
+            if (item.price < 20) {
+              break;
+            } else {
+              item.price -= largeProductsCostRandomizer;
+              break;
+            }
+          default:
+            break;
+        }
+      }
+      return item;
+      // 1. If the stocks are low, the price should be significantly higher and the other way round
+      // 2. There should be a basic flow of prices, independent of stock
+    });
   };
 
   buyProduct = product => {
@@ -114,7 +188,8 @@ export default class App extends React.Component {
     }));
   };
 
-  componentDidMount() {
+  componentWillMount() {
+    console.log("calling componentWillMount");
     this.cycleUpdate();
   }
 

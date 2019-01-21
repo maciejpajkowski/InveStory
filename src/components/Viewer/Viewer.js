@@ -16,7 +16,9 @@ const ViewerStyle = styled.div`
 const Viewer = props => (
   <ViewerStyle>
     {props.products.map(product => {
-      return (
+      return product.inStock > 0 ||
+        product.youHave > 0 ||
+        product.price <= 0 ? (
         <Product
           key={product.id}
           {...product}
@@ -24,7 +26,7 @@ const Viewer = props => (
           buyProduct={props.buyProduct}
           sellProduct={props.sellProduct}
         />
-      );
+      ) : null;
     })}
   </ViewerStyle>
 );
