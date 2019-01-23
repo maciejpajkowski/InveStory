@@ -50,7 +50,25 @@ const ProductStyle = styled.div`
 
   .sell-buy {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+
+    input {
+      width: 30px;
+      padding: 5px;
+      border: 1px solid darkgreen;
+      border-radius: 15px;
+      text-align: center;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
   }
 
   .price {
@@ -121,6 +139,7 @@ export default class Product extends React.Component {
               <button onClick={() => this.props.sellProduct(this.props)}>
                 SELL
               </button>
+              <input className="amount" type="number" defaultValue="1" />
               <button onClick={() => this.props.buyProduct(this.props)}>
                 BUY
               </button>

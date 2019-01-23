@@ -33,7 +33,7 @@ export default [
     price: 2.2,
     inStock: 20,
     youHave: 0,
-    classification: "medium"
+    classification: "small"
   },
   {
     id: 4,
@@ -42,6 +42,6 @@ export default [
     price: 32.5,
     inStock: 5,
     youHave: 0,
-    classification: "large"
+    classification: "medium"
   }
 ];

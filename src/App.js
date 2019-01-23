@@ -29,7 +29,7 @@ export default class App extends React.Component {
     if (!this.state.gameStarted) {
       setInterval(() => {
         this.callUpdate();
-      }, 8000); // IMPORTANT!
+      }, 10000); // IMPORTANT!
       this.setState({
         gameStarted: true
       });
@@ -99,13 +99,13 @@ export default class App extends React.Component {
       // Stock independent flow of prices
       const addOrRemoveRandomizer = Math.floor(Math.random() * 10 + 1);
       const smallProductsCostRandomizer =
-        Math.floor(Math.random() * 35 + 1) / 100;
+        Math.floor(Math.random() * 15 + 1) / 100;
       const mediumProductsCostRandomizer =
-        Math.floor(Math.random() * 120 + 1) / 100;
+        Math.floor(Math.random() * 380 + 1) / 100;
       const largeProductsCostRandomizer =
-        Math.floor(Math.random() * 600 + 1) / 100;
+        Math.floor(Math.random() * 750 + 1) / 100;
 
-      if (addOrRemoveRandomizer >= 5) {
+      if (addOrRemoveRandomizer >= 6) {
         switch (item.classification) {
           case "small":
             item.price += smallProductsCostRandomizer;
@@ -122,21 +122,21 @@ export default class App extends React.Component {
       } else {
         switch (item.classification) {
           case "small":
-            if (item.price < 0.3) {
+            if (item.price < 0.15) {
               break;
             } else {
               item.price -= smallProductsCostRandomizer;
               break;
             }
           case "medium":
-            if (item.price < 2) {
+            if (item.price < 4) {
               break;
             } else {
               item.price -= mediumProductsCostRandomizer;
               break;
             }
           case "large":
-            if (item.price < 20) {
+            if (item.price < 8) {
               break;
             } else {
               item.price -= largeProductsCostRandomizer;
@@ -160,6 +160,20 @@ export default class App extends React.Component {
     if (specificProduct.inStock > 0 && this.state.money > 0) {
       specificProduct.inStock--;
       specificProduct.youHave++;
+
+      switch (specificProduct.classification) {
+        case "small":
+          specificProduct.price += 0.01;
+          break;
+        case "medium":
+          specificProduct.price += 0.4;
+          break;
+        case "large":
+          specificProduct.price += 2.34;
+          break;
+        default:
+          break;
+      }
     } else {
       return;
     }
@@ -178,6 +192,20 @@ export default class App extends React.Component {
     if (specificProduct.youHave > 0) {
       specificProduct.inStock++;
       specificProduct.youHave--;
+
+      switch (specificProduct.classification) {
+        case "small":
+          specificProduct.price -= 0.01;
+          break;
+        case "medium":
+          specificProduct.price -= 0.4;
+          break;
+        case "large":
+          specificProduct.price -= 2.34;
+          break;
+        default:
+          break;
+      }
     } else {
       return;
     }
