@@ -101,6 +101,20 @@ const ProductStyle = styled.div`
       border: 1px solid greenyellow;
     }
   }
+
+  .buy-button {
+    opacity: ${props =>
+      props.money < props.price || props.inStock <= 0 ? "0.3" : "1"};
+    ${props =>
+      props.money < props.price || props.inStock <= 0
+        ? "pointer-events: none"
+        : ""};
+  }
+
+  .sell-button {
+    opacity: ${props => (!props.youHave ? "0.3" : "1")};
+    ${props => (!props.youHave ? "pointer-events: none" : "")};
+  }
 `;
 
 const B = styled.span`
@@ -110,7 +124,12 @@ const B = styled.span`
 export default class Product extends React.Component {
   render() {
     return (
-      <ProductStyle>
+      <ProductStyle
+        money={this.props.money}
+        price={this.props.price}
+        youHave={this.props.youHave}
+        inStock={this.props.inStock}
+      >
         <div className="divider">
           <div className="left-section">
             <h2>{this.props.title}</h2>
@@ -136,11 +155,17 @@ export default class Product extends React.Component {
               </span>
             </div>
             <div className="sell-buy">
-              <button onClick={() => this.props.sellProduct(this.props)}>
+              <button
+                className="sell-button"
+                onClick={() => this.props.sellProduct(this.props)}
+              >
                 SELL
               </button>
               <input className="amount" type="number" defaultValue="1" />
-              <button onClick={() => this.props.buyProduct(this.props)}>
+              <button
+                className="buy-button"
+                onClick={() => this.props.buyProduct(this.props)}
+              >
                 BUY
               </button>
             </div>
