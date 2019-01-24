@@ -58,6 +58,7 @@ const ProductStyle = styled.div`
       border: 1px solid darkgreen;
       border-radius: 15px;
       text-align: center;
+      box-shadow: 2px 2px 4px 1px #ddd inset;
 
       &:focus {
         outline: none;
@@ -122,6 +123,22 @@ const B = styled.span`
 `;
 
 export default class Product extends React.Component {
+  state = {
+    amountBought: 1
+  };
+
+  getAmountBought = e => {
+    e.preventDefault();
+    const amount = e.target.value;
+
+    this.setState(
+      () => ({
+        amountBought: amount
+      }),
+      () => console.log(this.state.amountBought)
+    );
+  };
+
   render() {
     return (
       <ProductStyle
@@ -161,7 +178,12 @@ export default class Product extends React.Component {
               >
                 SELL
               </button>
-              <input className="amount" type="number" defaultValue="1" />
+              <input
+                className="amount"
+                type="number"
+                defaultValue="1"
+                onChange={e => this.getAmountBought(e)}
+              />
               <button
                 className="buy-button"
                 onClick={() => this.props.buyProduct(this.props)}
