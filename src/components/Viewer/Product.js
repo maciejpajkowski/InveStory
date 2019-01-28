@@ -10,7 +10,6 @@ const ProductStyle = styled.div`
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
-
   &:hover {
     box-shadow: 0px 0px 20px 2px lightgreen;
     transform: translateY(-3px);
@@ -51,7 +50,6 @@ const ProductStyle = styled.div`
   .sell-buy {
     display: flex;
     justify-content: space-around;
-
     input {
       width: 30px;
       padding: 5px;
@@ -123,22 +121,6 @@ const B = styled.span`
 `;
 
 export default class Product extends React.Component {
-  state = {
-    amountBought: 1
-  };
-
-  getAmountBought = e => {
-    e.preventDefault();
-    const amount = e.target.value;
-
-    this.setState(
-      () => ({
-        amountBought: amount
-      }),
-      () => console.log(this.state.amountBought)
-    );
-  };
-
   render() {
     return (
       <ProductStyle
@@ -151,11 +133,11 @@ export default class Product extends React.Component {
           <div className="left-section">
             <h2>{this.props.title}</h2>
             <p className="description">{this.props.description}</p>
-            <p>--------------------------</p>
+            <hr />
             <span>
               Currently available:{" "}
               <B>
-                {this.props.inStock <= 0 ? "Out of stock" : this.props.inStock}
+                {this.props.inStock <= 0 ? "Out of stock!" : this.props.inStock}
               </B>
             </span>
             <br />
@@ -181,8 +163,8 @@ export default class Product extends React.Component {
               <input
                 className="amount"
                 type="number"
-                defaultValue="1"
-                onChange={e => this.getAmountBought(e)}
+                value={this.props.amountTraded}
+                onChange={e => this.props.getAmountTraded(e)}
               />
               <button
                 className="buy-button"

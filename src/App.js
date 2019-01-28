@@ -22,7 +22,8 @@ export default class App extends React.Component {
     money: 100.0,
     products: ProductsList,
     investments: [],
-    gameStarted: false
+    gameStarted: false,
+    amountTraded: 1
   };
 
   cycleUpdate = () => {
@@ -147,9 +148,19 @@ export default class App extends React.Component {
         }
       }
       return item;
-      // 1. If the stocks are low, the price should be significantly higher and the other way round
-      // 2. There should be a basic flow of prices, independent of stock
     });
+  };
+
+  getAmountTraded = e => {
+    e.preventDefault();
+    const amount = e.target.value;
+
+    this.setState(
+      () => ({
+        amountTraded: parseFloat(amount)
+      }),
+      () => console.log(this.state.amountTraded)
+    );
   };
 
   buyProduct = product => {
@@ -157,19 +168,23 @@ export default class App extends React.Component {
     const updatedProducts = [...this.state.products];
     const specificProduct = updatedProducts[index];
 
-    if (specificProduct.inStock > 0 && this.state.money > 0) {
-      specificProduct.inStock--;
-      specificProduct.youHave++;
+    if (
+      specificProduct.inStock > 0 &&
+      this.state.money > 0 &&
+      specificProduct.inStock >= this.state.amountTraded
+    ) {
+      specificProduct.inStock -= this.state.amountTraded;
+      specificProduct.youHave += this.state.amountTraded;
 
       switch (specificProduct.classification) {
         case "small":
-          specificProduct.price += 0.01;
+          specificProduct.price += 0.01 * this.state.amountTraded;
           break;
         case "medium":
-          specificProduct.price += 0.4;
+          specificProduct.price += 0.4 * this.state.amountTraded;
           break;
         case "large":
-          specificProduct.price += 2.34;
+          specificProduct.price += 3.64 * this.state.amountTraded;
           break;
         default:
           break;
@@ -179,8 +194,9 @@ export default class App extends React.Component {
     }
 
     this.setState(prevState => ({
-      money: prevState.money - product.price,
-      products: updatedProducts
+      money: prevState.money - specificProduct.price * this.state.amountTraded,
+      products: updatedProducts,
+      amountTraded: 1
     }));
   };
 
@@ -189,30 +205,33 @@ export default class App extends React.Component {
     const updatedProducts = [...this.state.products];
     const specificProduct = updatedProducts[index];
 
-    if (specificProduct.youHave > 0) {
-      specificProduct.inStock++;
-      specificProduct.youHave--;
-
+    if (
+      specificProduct.youHave > 0 &&
+      specificProduct.youHave >= this.state.amountTraded
+    ) {
       switch (specificProduct.classification) {
         case "small":
-          specificProduct.price -= 0.01;
+          specificProduct.price -= 0.01 * this.state.amountTraded;
           break;
         case "medium":
-          specificProduct.price -= 0.4;
+          specificProduct.price -= 0.4 * this.state.amountTraded;
           break;
         case "large":
-          specificProduct.price -= 2.34;
+          specificProduct.price -= 2.34 * this.state.amountTraded;
           break;
         default:
           break;
       }
+      specificProduct.inStock += this.state.amountTraded;
+      specificProduct.youHave -= this.state.amountTraded;
     } else {
       return;
     }
 
     this.setState(prevState => ({
-      money: prevState.money + product.price,
-      products: updatedProducts
+      money: prevState.money + specificProduct.price * this.state.amountTraded,
+      products: updatedProducts,
+      amountTraded: 1
     }));
   };
 
@@ -230,8 +249,10 @@ export default class App extends React.Component {
           <Viewer
             money={this.state.money}
             products={this.state.products}
+            amountTraded={this.state.amountTraded}
             buyProduct={this.buyProduct}
             sellProduct={this.sellProduct}
+            getAmountTraded={this.getAmountTraded}
           />
         </MainGrid>
       </Fragment>

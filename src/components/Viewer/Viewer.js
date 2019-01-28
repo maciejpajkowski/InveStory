@@ -23,8 +23,10 @@ const Viewer = props => (
           key={product.id}
           {...product}
           money={props.money}
+          amountTraded={props.amountTraded}
           buyProduct={props.buyProduct}
           sellProduct={props.sellProduct}
+          getAmountTraded={props.getAmountTraded}
         />
       ) : null;
     })}
