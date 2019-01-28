@@ -1,6 +1,6 @@
-## Roadmap
+# Roadmap
 
-# To do list
+## To do list
 
 - ~~Build a basic UI for the app (header, sidebar, trade options)~~ DONE!
 - ~~Improve the UI to be more aesthetically pleasing~~ DONE!
@@ -19,3 +19,5 @@
 - ~~Allow the player to choose how much of the product do they want to buy/sell~~ DONE!
 - Add a timer on sidebar to show how much until next stock & prices updates
 - Add the ability to invest
+
+Once all of the above is done, the project will be considered finished.
