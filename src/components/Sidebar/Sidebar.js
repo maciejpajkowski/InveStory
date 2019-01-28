@@ -57,6 +57,28 @@ const SidebarStyle = styled.div`
       font-size: 20px;
     }
   }
+
+  .time-container {
+    color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timer {
+    width: 80%;
+    height: 40px;
+    border: 1px solid lightgreen;
+    border-radius: 10px;
+  }
+
+  .timer--fill {
+    background-color: lightgreen;
+    transition: all 0.3s;
+    width: ${props => props.counter + 10}%;
+    height: 100%;
+    border-radius: inherit;
+  }
 `;
 
 const B = styled.span`
@@ -65,7 +87,7 @@ const B = styled.span`
 `;
 
 const Sidebar = props => (
-  <SidebarStyle money={props.money}>
+  <SidebarStyle money={props.money} counter={props.counter}>
     <h1>InveStory</h1>
     <div className="username">$</div>
     <p className="money">
@@ -76,11 +98,13 @@ const Sidebar = props => (
       <li>INVEST</li>
       <li>STATS</li>
     </ul>
+    <div className="time-container">
+      <p>Stock and prices update:</p>
+      <div className="timer">
+        <div className="timer--fill" />
+      </div>
+    </div>
   </SidebarStyle>
 );
-
-Sidebar.defaultProps = {
-  money: 100.0
-};
 
 export default Sidebar;

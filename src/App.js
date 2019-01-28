@@ -23,7 +23,19 @@ export default class App extends React.Component {
     products: ProductsList,
     investments: [],
     gameStarted: false,
-    amountTraded: 1
+    amountTraded: 1,
+    counter: 0
+  };
+
+  countdown = () => {
+    let counter = this.state.counter;
+    counter += 10;
+    if (counter === 100) {
+      counter = 0;
+    }
+    this.setState(() => ({
+      counter
+    }));
   };
 
   cycleUpdate = () => {
@@ -31,6 +43,9 @@ export default class App extends React.Component {
       setInterval(() => {
         this.callUpdate();
       }, 10000); // IMPORTANT!
+      setInterval(() => {
+        this.countdown();
+      }, 1000);
       this.setState({
         gameStarted: true
       });
@@ -245,7 +260,7 @@ export default class App extends React.Component {
       <Fragment>
         <GlobalStyle />
         <MainGrid>
-          <Sidebar money={this.state.money} />
+          <Sidebar money={this.state.money} counter={this.state.counter} />
           <Viewer
             money={this.state.money}
             products={this.state.products}

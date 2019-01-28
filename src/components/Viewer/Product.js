@@ -10,6 +10,7 @@ const ProductStyle = styled.div`
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
+
   &:hover {
     box-shadow: 0px 0px 20px 2px lightgreen;
     transform: translateY(-3px);
@@ -49,12 +50,16 @@ const ProductStyle = styled.div`
 
   .sell-buy {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
+
     input {
-      width: 30px;
-      padding: 5px;
+      width: 40%;
+      padding: 8px;
+      margin: 5px 0;
       border: 1px solid darkgreen;
-      border-radius: 15px;
+      border-radius: 10px;
       text-align: center;
       box-shadow: 2px 2px 4px 1px #ddd inset;
 
@@ -76,7 +81,7 @@ const ProductStyle = styled.div`
   }
 
   button {
-    width: 60px;
+    width: 80px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid lightgreen;
