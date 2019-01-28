@@ -1,7 +1,5 @@
 # Roadmap
 
-## To do list
-
 - ~~Build a basic UI for the app (header, sidebar, trade options)~~ DONE!
 - ~~Improve the UI to be more aesthetically pleasing~~ DONE!
 - ~~Implement basic functionality for selling and buying products~~ DONE!
