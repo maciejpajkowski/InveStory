@@ -193,13 +193,13 @@ export default class App extends React.Component {
 
       switch (specificProduct.classification) {
         case "small":
-          specificProduct.price += 0.01 * this.state.amountTraded;
+          specificProduct.price += 0.01 * this.state.amountTraded * 0.8;
           break;
         case "medium":
-          specificProduct.price += 0.4 * this.state.amountTraded;
+          specificProduct.price += 4.15 * this.state.amountTraded * 0.8;
           break;
         case "large":
-          specificProduct.price += 3.64 * this.state.amountTraded;
+          specificProduct.price += 26.6 * this.state.amountTraded * 0.8;
           break;
         default:
           break;
@@ -226,13 +226,13 @@ export default class App extends React.Component {
     ) {
       switch (specificProduct.classification) {
         case "small":
-          specificProduct.price -= 0.01 * this.state.amountTraded;
+          specificProduct.price -= 0.01;
           break;
         case "medium":
-          specificProduct.price -= 0.4 * this.state.amountTraded;
+          specificProduct.price -= 4.15;
           break;
         case "large":
-          specificProduct.price -= 2.34 * this.state.amountTraded;
+          specificProduct.price -= 26.6;
           break;
         default:
           break;

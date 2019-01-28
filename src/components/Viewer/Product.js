@@ -28,18 +28,19 @@ const ProductStyle = styled.div`
 
   .divider {
     display: flex;
+    justify-content: space-between;
     height: 100%;
   }
 
   .left-section {
-    flex-grow: 0.9;
+    width: 60%;
   }
 
   .right-section {
+    width: 40%;
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 30%;
     justify-content: space-between;
   }
 
@@ -55,7 +56,7 @@ const ProductStyle = styled.div`
     justify-content: space-around;
 
     input {
-      width: 40%;
+      width: 25%;
       padding: 8px;
       margin: 5px 0;
       border: 1px solid darkgreen;
@@ -139,16 +140,15 @@ export default class Product extends React.Component {
             <h2>{this.props.title}</h2>
             <p className="description">{this.props.description}</p>
             <hr />
-            <span>
+            <p>
               Currently available:{" "}
               <B>
                 {this.props.inStock <= 0 ? "Out of stock!" : this.props.inStock}
               </B>
-            </span>
-            <br />
-            <span>
+            </p>
+            <p>
               You have: <B>{this.props.youHave}</B>
-            </span>
+            </p>
           </div>
           <div className="right-section">
             <div className="cost">
