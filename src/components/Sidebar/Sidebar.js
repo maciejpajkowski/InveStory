@@ -97,6 +97,7 @@ const Sidebar = props => (
       <li>TRADE</li>
       <li>INVEST</li>
       <li>STATS</li>
+      <li>INSTRUCTIONS</li>
     </ul>
     <div className="time-container">
       <p>Stock and prices update:</p>
