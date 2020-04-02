@@ -16,7 +16,6 @@
 - Add app routing to be able to switch between Trading and Investing ("Stats" will most likely be ignored for now, but not forgotten)
 - ~~Allow the player to choose how much of the product do they want to buy/sell~~ DONE!
 - ~~Add a timer on sidebar to show how much until next stock & prices updates~~ DONE!
-- Add the ability to invest + at least 9 investment opportunities
 - Write instructions
 - Add basic RWD
 - ~~Improve the bulk purchase/sell to make more sense than it does now~~ IT KINDA MAKES SENSE NOW!

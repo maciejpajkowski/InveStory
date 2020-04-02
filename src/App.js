@@ -1,8 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Viewer from "./components/Viewer/Viewer";
 import ProductsList from "./data/ProductsList";
+import Instructions from "./components/Instructions/Instructions";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,7 +23,6 @@ export default class App extends React.Component {
   state = {
     money: 100.0,
     products: ProductsList,
-    investments: [],
     gameStarted: false,
     amountTraded: 1,
     counter: 0
@@ -166,15 +167,11 @@ export default class App extends React.Component {
     });
   };
 
-  getAmountTraded = e => {
-    e.preventDefault();
-    const amount = e.target.value;
-
+  getAmountTraded = (tradeAmount) => {
     this.setState(
       () => ({
-        amountTraded: parseFloat(amount)
-      }),
-      () => console.log(this.state.amountTraded)
+        amountTraded: parseFloat(tradeAmount)
+      })
     );
   };
 
@@ -250,27 +247,36 @@ export default class App extends React.Component {
     }));
   };
 
-  componentWillMount() {
-    console.log("calling componentWillMount");
+  componentDidMount() {
+    console.log("calling componentDidMount");
     this.cycleUpdate();
   }
 
   render() {
     return (
-      <Fragment>
+      <>
         <GlobalStyle />
-        <MainGrid>
-          <Sidebar money={this.state.money} counter={this.state.counter} />
-          <Viewer
-            money={this.state.money}
-            products={this.state.products}
-            amountTraded={this.state.amountTraded}
-            buyProduct={this.buyProduct}
-            sellProduct={this.sellProduct}
-            getAmountTraded={this.getAmountTraded}
-          />
-        </MainGrid>
-      </Fragment>
+        <BrowserRouter>
+          <MainGrid>
+            <Sidebar money={this.state.money} counter={this.state.counter} />
+            <Switch>
+              <Route exact path="/">
+                <Viewer
+                  money={this.state.money}
+                  products={this.state.products}
+                  amountTraded={this.state.amountTraded}
+                  buyProduct={this.buyProduct}
+                  sellProduct={this.sellProduct}
+                  getAmountTraded={this.getAmountTraded}
+                />
+              </Route>
+              <Route path="/instructions">
+                <Instructions />
+              </Route>
+            </Switch>
+          </MainGrid>
+        </BrowserRouter>
+      </>
     );
   }
 }

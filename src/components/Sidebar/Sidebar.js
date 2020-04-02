@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const SidebarStyle = styled.div`
   background-color: #fff;
@@ -8,12 +9,10 @@ const SidebarStyle = styled.div`
   display: flex;
   padding: 20px 0;
   flex-direction: column;
-
   h1 {
     text-align: center;
     color: lightgreen;
   }
-
   .username {
     display: flex;
     height: 180px;
@@ -27,13 +26,11 @@ const SidebarStyle = styled.div`
     justify-content: center;
     align-items: center;
   }
-
   .money {
     font-size: 24px;
     color: ${props => (props.money < 0 ? "red" : "limegreen")};
     text-align: center;
   }
-
   ul {
     display: flex;
     flex-direction: column;
@@ -41,7 +38,6 @@ const SidebarStyle = styled.div`
     margin: 0;
     padding: 0;
   }
-
   li {
     color: limegreen;
     display: flex;
@@ -49,7 +45,6 @@ const SidebarStyle = styled.div`
     width: 100%;
     line-height: 50px;
     transition: all 0.3s;
-
     &:hover {
       background-color: lightgreen;
       color: #fff;
@@ -57,21 +52,21 @@ const SidebarStyle = styled.div`
       font-size: 20px;
     }
   }
-
+  a {
+    text-decoration: none;
+  }
   .time-container {
     color: green;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-
   .timer {
     width: 80%;
     height: 40px;
     border: 1px solid lightgreen;
     border-radius: 10px;
   }
-
   .timer--fill {
     background-color: lightgreen;
     transition: all 0.3s;
@@ -94,10 +89,12 @@ const Sidebar = props => (
       Cash: <B>{parseFloat(props.money).toFixed(2)} $</B>
     </p>
     <ul>
-      <li>TRADE</li>
-      <li>INVEST</li>
-      <li>STATS</li>
-      <li>INSTRUCTIONS</li>
+      <Link to="/">
+        <li>TRADE</li>
+      </Link>
+      <Link to="/instructions">
+        <li>INSTRUCTIONS</li>
+      </Link>
     </ul>
     <div className="time-container">
       <p>Stock and prices update:</p>
