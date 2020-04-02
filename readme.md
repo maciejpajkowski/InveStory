@@ -12,11 +12,11 @@
 - ~~Improve buy/sell buttons to make them disabled once a condition is met (not enough money to buy something or nothing to be sold)~~ DONE!
 - ~~Refactor the code to optimize the workflow~~ TURNS OUT IT'S FINE! (I guess)
 - ~~Add slightly more products on the market~~ DONE!
-- Add more UX features such as more CSS animations to make the experience more interesting
-- Add app routing to be able to switch between Trading and Investing ("Stats" will most likely be ignored for now, but not forgotten)
+- Add more UX features such as more CSS animations to make the experience more interesting (optional)
+- ~~Add app routing to be able to switch between Trading and Investing ("Stats" will most likely be ignored for now, but not forgotten)~~ DONE!
 - ~~Allow the player to choose how much of the product do they want to buy/sell~~ DONE!
 - ~~Add a timer on sidebar to show how much until next stock & prices updates~~ DONE!
-- Write instructions
+- ~~Write instructions~~ DONE!
 - Add basic RWD
 - ~~Improve the bulk purchase/sell to make more sense than it does now~~ IT KINDA MAKES SENSE NOW!
 
