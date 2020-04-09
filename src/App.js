@@ -1,23 +1,11 @@
 import React from "react";
-import styled, { createGlobalStyle } from "styled-components";
+import GlobalStyle from "./styles/GlobalStyle";
+import StyledMainGrid from './styles/StyledMainGrid';
 import Sidebar from "./components/Sidebar/Sidebar";
 import Viewer from "./components/Viewer/Viewer";
 import ProductsList from "./data/ProductsList";
 import Instructions from "./components/Instructions/Instructions";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    font-family: 'Trebuchet MS', 'Verdana', monospace;
-  }
-`;
-
-const MainGrid = styled.div`
-  display: grid;
-  grid-template-columns: 300px 1620px;
-  height: 100vh;
-`;
 
 export default class App extends React.Component {
   state = {
@@ -257,7 +245,7 @@ export default class App extends React.Component {
       <>
         <GlobalStyle />
         <BrowserRouter>
-          <MainGrid>
+          <StyledMainGrid>
             <Sidebar money={this.state.money} counter={this.state.counter} />
             <Switch>
               <Route exact path="/">
@@ -274,7 +262,7 @@ export default class App extends React.Component {
                 <Instructions />
               </Route>
             </Switch>
-          </MainGrid>
+          </StyledMainGrid>
         </BrowserRouter>
       </>
     );

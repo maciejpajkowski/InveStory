@@ -1,20 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import StyledViewer from "../../styles/StyledViewer";
 import Product from "./Product";
 
-const ViewerStyle = styled.div`
-  background-color: #fafafa;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 40px;
-  grid-row-gap: 40px;
-  padding: 40px;
-  overflow-y: scroll;
-`;
-
 const Viewer = props => (
-  <ViewerStyle>
+  <StyledViewer>
     {props.products.map(product => {
       return product.inStock > 0 ||
         product.youHave > 0 ||
@@ -30,7 +19,7 @@ const Viewer = props => (
         />
       ) : null;
     })}
-  </ViewerStyle>
+  </StyledViewer>
 );
 
 export default Viewer;
