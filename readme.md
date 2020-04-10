@@ -22,3 +22,6 @@
 Once all of the above is done, the project will be considered finished.
 
 Aaaand it's done!
+
+Live:
+https://investory.netlify.com
