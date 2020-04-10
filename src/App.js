@@ -42,7 +42,6 @@ export default class App extends React.Component {
   };
 
   callUpdate = () => {
-    console.log("Stock updated!");
     this.state.products.map(item => {
       const addOrRemoveRandomizer = Math.floor(Math.random() * 10 + 1);
       const smallProductsStockRandomizer = Math.floor(Math.random() * 20 + 1);
@@ -99,7 +98,6 @@ export default class App extends React.Component {
   };
 
   modifyPrices = () => {
-    console.log("Prices updated!");
     this.state.products.map(item => {
       // Stock independent flow of prices
       const addOrRemoveRandomizer = Math.floor(Math.random() * 10 + 1);
@@ -236,7 +234,6 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log("calling componentDidMount");
     this.cycleUpdate();
   }
 

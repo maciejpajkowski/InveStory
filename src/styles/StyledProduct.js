@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 const StyledProduct = styled.div`
+  box-sizing: border-box;
   color: darkgreen;
   background-color: #fff;
-  height: 200px;
+  height: 100%;
+  width: 100%;
   box-shadow: 0px 0px 4px 1px #a2d9a2;
-  padding: 30px;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
@@ -17,7 +19,7 @@ const StyledProduct = styled.div`
   }
 
   h2 {
-    margin: 10px 0;
+    margin: 0.8rem 0;
   }
 
   .description {
@@ -29,22 +31,25 @@ const StyledProduct = styled.div`
     display: flex;
     justify-content: space-between;
     height: 100%;
+    width: 100%;
+   /* padding: 1.5rem;*/
   }
 
   .left-section {
-    width: 60%;
+    width: 70%;
   }
 
   .right-section {
-    width: 40%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
+    align-items: center;
   }
 
   .cost {
-    margin-top: 10px;
+    margin-top: 0.8rem;
     text-align: center;
   }
 
@@ -76,14 +81,14 @@ const StyledProduct = styled.div`
   }
 
   .price {
-    font-size: 28px;
+    font-size: 1.5rem;
     color: limegreen;
   }
 
   button {
-    width: 80px;
-    padding: 10px;
-    font-size: 16px;
+    width: 4rem;
+    padding: 0.7rem;
+    font-size: 1rem;
     border: 1px solid lightgreen;
     border-radius: 10px;
     background-color: #fff;
@@ -122,6 +127,23 @@ const StyledProduct = styled.div`
 
   span.bold {
     font-weight: 800;
+  }
+
+  @media (max-width: 992px) {
+    font-size: 0.9rem;
+
+    button {
+      padding: 0.6rem;
+      line-height: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+
+    .cost {
+      margin-bottom: 0.5rem;
+    }
   }
 `;
 

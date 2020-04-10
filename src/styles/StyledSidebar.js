@@ -48,6 +48,7 @@ const StyledSidebar = styled.div`
     width: 100%;
     line-height: 50px;
     transition: all 0.3s;
+
     &:hover {
       background-color: lightgreen;
       color: #fff;
@@ -69,7 +70,7 @@ const StyledSidebar = styled.div`
 
   .timer {
     width: 80%;
-    height: 40px;
+    height: 2rem;
     border: 1px solid lightgreen;
     border-radius: 10px;
   }
@@ -85,6 +86,47 @@ const StyledSidebar = styled.div`
   span {
     font-weight: 800;
     font-size: 26px;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: row;
+    padding: 0.1rem 0.1rem;
+    justify-content: space-between;
+    
+    h1 {
+      display: none;
+    }
+
+    .money {
+      padding: 0 1rem;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .username {
+      display: none;
+    }
+
+    span {
+      display: block;
+      font-size: 1.2rem;
+    }
+
+    .time-container {
+      text-align: center;
+    }
+
+    li {
+      font-size: 0.8rem;
+      padding: 0 0.1rem;
+      margin: 0 0.1rem;
+
+      &:hover {
+        font-size: 0.8rem;
+      }
+    }
   }
 `;
 
