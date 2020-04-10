@@ -5,10 +5,15 @@ const StyledViewer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 40px;
-  grid-row-gap: 40px;
-  padding: 40px;
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  padding: 2rem;
   overflow-y: scroll;
+
+  &::after {
+    content: "";
+    height: 1rem;
+  }
 
   @media (max-width: 1366px) {
     grid-template-columns: repeat(2, 1fr);
